@@ -22,10 +22,8 @@ def load_user(user_id):
 @app.route('/')
 def index():
     db_sess = db_session.create_session()
-    # Получаем все записи текущего пользователя
     if current_user.is_authenticated:
         memories = db_sess.query(Content).filter(Content.user_id == current_user.id).all()
-        # Генерируем временные ссылки для отображения картинок
         for item in memories:
             item.temp_url = yd.get_download_link(item.yandex_path)
     else:
@@ -37,15 +35,13 @@ def index():
 def add_memory():
     form = ContentForm()
     if form.validate_on_submit():
-        file_data = form.photo.data.read() # Читаем байты файла прямо из формы
+        file_data = form.photo.data.read()
         filename = form.photo.data.filename
         
-        # Загружаем на Яндекс.Диск без сохранения на сервере
         yandex_path = f"disk:/assistant_app/{current_user.id}/{filename}"
         yd.create_folder(f"disk:/assistant_app/{current_user.id}")
         yd.upload_bytes(yandex_path, file_data)
         
-        # Сохраняем запись в БД
         db_sess = db_session.create_session()
         memory = Content(
             category='photo',
