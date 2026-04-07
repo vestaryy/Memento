@@ -18,7 +18,6 @@ class YandexDisk:
         
         res = requests.get(upload_endpoint, headers=self.headers, params=params)
         if res.status_code != 200:
-            print(f"Ошибка получения ссылки: {res.json().get('message')}")
             return False
             
         href = res.json().get('href')
