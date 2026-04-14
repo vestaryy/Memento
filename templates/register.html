@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация | Memento</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="border-radius: 10px;">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+        <div class="form-container">
+            <h2 class="text-center mb-4">Регистрация в Memento</h2>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    <label class="upload-label">Ваше имя</label>
+                    {{ form.name(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    <label class="upload-label">Email</label>
+                    {{ form.email(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    <label class="upload-label">Пароль</label>
+                    {{ form.password(class="form-control", type="password") }}
+                </div>
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-add text-white") }}
+                </div>
+                <p class="text-center mt-3 text-muted">
+                    Уже есть аккаунт? <a href="/login" class="text-danger">Войти</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

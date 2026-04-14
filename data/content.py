@@ -12,5 +12,5 @@ class Content(SqlAlchemyBase):
     description = sqlalchemy.Column(sqlalchemy.Text, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)
     
-    user_id = sqlalchemy.Column(sqlalchemy.BigInteger, sqlalchemy.ForeignKey("users.tg_id"))
+    user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
     user = orm.relationship('User')

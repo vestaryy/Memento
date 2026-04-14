@@ -11,6 +11,7 @@ class YandexDisk:
         res = requests.put(self.base_url, headers=self.headers, params=params)
         return res.status_code in (201, 409)
 
+
     def upload_bytes(self, disk_path, file_bytes):
         
         upload_endpoint = f"{self.base_url}/upload"
@@ -31,6 +32,8 @@ class YandexDisk:
         params = {'path': disk_path}
         
         res = requests.get(download_endpoint, headers=self.headers, params=params)
+        
         if res.status_code == 200:
             return res.json().get('href')
+        
         return None
