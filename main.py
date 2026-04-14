@@ -15,7 +15,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 login_manager.login_message = "Пожалуйста, авторизуйтесь"
 
-yd = YandexDisk("y0__xCl_6eoBxiWrkAgn-3MihcNhrbEnktI4V0t9MPDFlJ9FJspOw")
+yd = YandexDisk("")
 
 
 
