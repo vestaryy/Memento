@@ -1,4 +1,5 @@
 #!/bin/bash
+cd Memento # Your app working directory!!!
 export PORT=5000
 unset PIP_USER
 
